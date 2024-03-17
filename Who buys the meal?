@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+int main() {
+    char names_string[100];
+    printf("Enter names separated by comma and space: ");
+    fgets(names_string, 100, stdin);
+    names_string[strcspn(names_string, "\n")] = 0; // Remove trailing newline
+
+    char *names[20];
+    int count = 0;
+
+    char *token = strtok(names_string, ", ");
+    while (token != NULL) {
+        names[count++] = token;
+        token = strtok(NULL, ", ");
+    }
+
+    srand(time(0));
+    int randomIndex = rand() % count;
+
+    printf("%s is going to buy the meal today!\n", names[randomIndex]);
+    
+    return 0;
+}
